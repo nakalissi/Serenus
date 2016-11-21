@@ -15,6 +15,10 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     
     // MARK: - UIViewController
     
+    override func viewDidLoad() {
+        NotificationCenter.default.addObserver(self, selector: #selector(appliationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddKeyword" {
             if let navigationController = segue.destination as? UINavigationController,
@@ -74,6 +78,10 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     
     @IBAction func didTapEdit() {
         tableView.setEditing(!tableView.isEditing, animated: true)
+    }
+    
+    func appliationWillEnterForeground() {
+        tableView.reloadData()
     }
     
     // MARK: - Private
