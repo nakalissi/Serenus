@@ -23,18 +23,18 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbP-a9-rdj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-239" y="126"/>
+            <point key="canvasLocation" x="142" y="125"/>
         </scene>
         <!--Serenus-->
         <scene sceneID="oFi-nR-5AO">
             <objects>
                 <tableViewController id="Xhf-7U-vjY" customClass="BlacklistViewController" customModule="Serenus" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aB4-gc-g54">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aB4-gc-g54">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Keyword" textLabel="doH-of-IZd" style="IBUITableViewCellStyleDefault" id="xCo-eJ-TLX">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="Keyword" textLabel="doH-of-IZd" style="IBUITableViewCellStyleDefault" id="xCo-eJ-TLX">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xCo-eJ-TLX" id="uvG-h6-SSz">
@@ -58,6 +58,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Serenus" id="gnY-1W-O4e">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="eza-Nr-u7g">
+                            <connections>
+                                <action selector="didTapEdit" destination="Xhf-7U-vjY" id="Bgf-o5-f3K"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="6vW-5Z-2ss">
                             <connections>
                                 <segue destination="V1C-Eo-lnv" kind="presentation" identifier="AddKeyword" id="HV7-Mo-ApU"/>
@@ -68,7 +73,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A7H-Sq-BwU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="583" y="125"/>
+            <point key="canvasLocation" x="929" y="125"/>
         </scene>
         <!--Add Keyword-->
         <scene sceneID="X7b-fq-Nma">
@@ -129,7 +134,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zqu-qh-5U8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1461.5999999999999" y="886.50674662668678"/>
+            <point key="canvasLocation" x="929" y="887"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nOY-ox-sC4">
@@ -145,10 +150,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Fy-53-YNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="582" y="887"/>
+            <point key="canvasLocation" x="143" y="887"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0Zl-hT-r8u"/>
+        <segue reference="qOw-ka-64i"/>
     </inferredMetricsTieBreakers>
 </document>

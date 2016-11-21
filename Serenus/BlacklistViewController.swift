@@ -30,19 +30,11 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     // MARK: - AddKeywordViewControllerDelegate
     
     func didSave(keyword: String) {
-        var items = userDefaults?.stringArray(forKey: "BlacklistKeywords") ?? []
-        items.append(keyword)
-        userDefaults?.set(items, forKey: "BlacklistKeywords")
+        mutateItems { (items: inout [String]) in
+            items.append(keyword)
+        }
         
         tableView.reloadData()
-        
-        SFContentBlockerManager.reloadContentBlocker(withIdentifier: "com.noisysocks.Serenus.ContentBlocker", completionHandler: {
-            (error: Error?) -> Void in
-            print("did stuff")
-            if let error = error {
-                print(error)
-            }
-        })
     }
     
     // MARK: - UITableViewDataSource
@@ -59,5 +51,43 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            mutateItems { (items: inout [String]) in
+                items.remove(at: indexPath.row)
+            }
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        mutateItems { (items: inout [String]) in
+            let item = items.remove(at: sourceIndexPath.row)
+            items.insert(item, at: destinationIndexPath.row)
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func didTapEdit() {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+    }
+    
+    // MARK: - Private
+    
+    private func mutateItems(action: (inout [String]) -> Void) {
+        var items = userDefaults?.stringArray(forKey: "BlacklistKeywords") ?? []
+        action(&items)
+        userDefaults?.set(items, forKey: "BlacklistKeywords")
+        
+        SFContentBlockerManager.reloadContentBlocker(withIdentifier: "com.noisysocks.Serenus.ContentBlocker", completionHandler: {
+            (error: Error?) -> Void in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+        })
     }
 }
