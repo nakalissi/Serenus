@@ -9,17 +9,16 @@
 /* Begin PBXBuildFile section */
 		3F8559971DE24976001FB974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8559961DE24976001FB974 /* AppDelegate.swift */; };
 		3F8559991DE24976001FB974 /* BlacklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8559981DE24976001FB974 /* BlacklistViewController.swift */; };
-		3F85599C1DE24976001FB974 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F85599A1DE24976001FB974 /* Main.storyboard */; };
 		3F85599E1DE24976001FB974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F85599D1DE24976001FB974 /* Assets.xcassets */; };
 		3F8559A11DE24976001FB974 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F85599F1DE24976001FB974 /* LaunchScreen.storyboard */; };
 		3F8559AF1DE24986001FB974 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F8559AE1DE24986001FB974 /* blockerList.json */; };
 		3F8559B11DE24986001FB974 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8559B01DE24986001FB974 /* ContentBlockerRequestHandler.swift */; };
 		3F8559B51DE24986001FB974 /* ContentBlocker.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3F8559AC1DE24986001FB974 /* ContentBlocker.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3F8559BD1DE24CF5001FB974 /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8559BC1DE24CF5001FB974 /* DismissSegue.swift */; };
 		3F8559C11DE252A4001FB974 /* AddKeywordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8559C01DE252A4001FB974 /* AddKeywordViewController.swift */; };
 		3F8559CB1DE29F27001FB974 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8559CA1DE29F27001FB974 /* ActionRequestHandler.swift */; };
 		3F8559CD1DE29F27001FB974 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F8559CC1DE29F27001FB974 /* Action.js */; };
 		3F8559D11DE29F27001FB974 /* Action.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3F8559C81DE29F27001FB974 /* Action.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3F94CD2F1E333244004191CB /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94CD2E1E333244004191CB /* TextFieldCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +57,6 @@
 		3F8559931DE24976001FB974 /* Serenus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Serenus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F8559961DE24976001FB974 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F8559981DE24976001FB974 /* BlacklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlacklistViewController.swift; sourceTree = "<group>"; };
-		3F85599B1DE24976001FB974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F85599D1DE24976001FB974 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F8559A01DE24976001FB974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F8559A21DE24976001FB974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,13 +66,13 @@
 		3F8559B21DE24986001FB974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F8559BA1DE2498E001FB974 /* Serenus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Serenus.entitlements; sourceTree = "<group>"; };
 		3F8559BB1DE249AA001FB974 /* ContentBlocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ContentBlocker.entitlements; sourceTree = "<group>"; };
-		3F8559BC1DE24CF5001FB974 /* DismissSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		3F8559C01DE252A4001FB974 /* AddKeywordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddKeywordViewController.swift; sourceTree = "<group>"; };
 		3F8559C81DE29F27001FB974 /* Action.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Action.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F8559CA1DE29F27001FB974 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
 		3F8559CC1DE29F27001FB974 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 		3F8559CE1DE29F27001FB974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F8559D51DE2A2A4001FB974 /* Action.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Action.entitlements; sourceTree = "<group>"; };
+		3F94CD2E1E333244004191CB /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +127,7 @@
 				3F8559961DE24976001FB974 /* AppDelegate.swift */,
 				3F8559981DE24976001FB974 /* BlacklistViewController.swift */,
 				3F8559C01DE252A4001FB974 /* AddKeywordViewController.swift */,
-				3F85599A1DE24976001FB974 /* Main.storyboard */,
-				3F8559BC1DE24CF5001FB974 /* DismissSegue.swift */,
+				3F94CD2E1E333244004191CB /* TextFieldCell.swift */,
 				3F85599D1DE24976001FB974 /* Assets.xcassets */,
 				3F85599F1DE24976001FB974 /* LaunchScreen.storyboard */,
 				3F8559A21DE24976001FB974 /* Info.plist */,
@@ -286,7 +283,6 @@
 			files = (
 				3F8559A11DE24976001FB974 /* LaunchScreen.storyboard in Resources */,
 				3F85599E1DE24976001FB974 /* Assets.xcassets in Resources */,
-				3F85599C1DE24976001FB974 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,9 +310,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F8559991DE24976001FB974 /* BlacklistViewController.swift in Sources */,
-				3F8559BD1DE24CF5001FB974 /* DismissSegue.swift in Sources */,
 				3F8559C11DE252A4001FB974 /* AddKeywordViewController.swift in Sources */,
 				3F8559971DE24976001FB974 /* AppDelegate.swift in Sources */,
+				3F94CD2F1E333244004191CB /* TextFieldCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,14 +348,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3F85599A1DE24976001FB974 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3F85599B1DE24976001FB974 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3F85599F1DE24976001FB974 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -587,6 +575,7 @@
 				3F8559D31DE29F27001FB974 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

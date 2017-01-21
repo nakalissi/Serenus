@@ -13,32 +13,41 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
 
     private let userDefaults = UserDefaults(suiteName: "group.com.noisysocks.Serenus")
     
-    // MARK: - UIViewController
-    
-    override func viewDidLoad() {
+    init() {
+        super.init(style: .plain)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(appliationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddKeyword" {
-            if let navigationController = segue.destination as? UINavigationController,
-                let destination = navigationController.topViewController as? AddKeywordViewController {
-                destination.delegate = self
-            }
-            else {
-                fatalError("That ain't where this segue is supposed to go!")
-            }
-        }
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: - AddKeywordViewControllerDelegate
+    override func viewDidLoad() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(didTapEdit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+    }
     
-    func didSave(keyword: String) {
-        mutateItems { (items: inout [String]) in
-            items.append(keyword)
-        }
-        
+    // MARK: - Actions
+    
+    func appliationWillEnterForeground() {
         tableView.reloadData()
+    }
+    
+    func didTapEdit() {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+    }
+    
+    func didTapAdd() {
+        let viewController = AddKeywordViewController()
+        viewController.delegate = self
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     // MARK: - UITableViewDataSource
@@ -48,7 +57,7 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Keyword", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "KeywordCell") ?? UITableViewCell(style: .default, reuseIdentifier: "KeywordCell")
         
         if let items = userDefaults?.stringArray(forKey: "BlacklistKeywords") {
              cell.textLabel?.text = items[indexPath.row]
@@ -59,7 +68,7 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            mutateItems { (items: inout [String]) in
+            mutateItems { items in
                 items.remove(at: indexPath.row)
             }
             
@@ -68,19 +77,19 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        mutateItems { (items: inout [String]) in
+        mutateItems { items in
             let item = items.remove(at: sourceIndexPath.row)
             items.insert(item, at: destinationIndexPath.row)
         }
     }
     
-    // MARK: - Actions
+    // MARK: - AddKeywordViewControllerDelegate
     
-    @IBAction func didTapEdit() {
-        tableView.setEditing(!tableView.isEditing, animated: true)
-    }
-    
-    func appliationWillEnterForeground() {
+    func addKeywordViewController(_ viewController: AddKeywordViewController, didSaveKeyword keyword: String) {
+        mutateItems { items in
+            items.append(keyword)
+        }
+        
         tableView.reloadData()
     }
     
@@ -91,11 +100,13 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
         action(&items)
         userDefaults?.set(items, forKey: "BlacklistKeywords")
         
-        SFContentBlockerManager.reloadContentBlocker(withIdentifier: "com.noisysocks.Serenus.ContentBlocker", completionHandler: {
-            (error: Error?) -> Void in
-            if let error = error {
-                fatalError(error.localizedDescription)
+        SFContentBlockerManager.reloadContentBlocker(
+            withIdentifier: "com.noisysocks.Serenus.ContentBlocker",
+            completionHandler: { error in
+                if let error = error {
+                    fatalError(error.localizedDescription)
+                }
             }
-        })
+        )
     }
 }
