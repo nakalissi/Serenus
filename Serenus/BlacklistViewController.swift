@@ -13,6 +13,8 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
 
     private let userDefaults = UserDefaults(suiteName: "group.com.noisysocks.Serenus")
     
+    private var rowBeingEdited: Int?
+    
     init() {
         super.init(style: .plain)
         
@@ -31,6 +33,9 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     override func viewDidLoad() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(didTapEdit))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+        
+        tableView.allowsSelection = false
+        tableView.allowsSelectionDuringEditing = true
     }
     
     // MARK: - Actions
@@ -44,9 +49,7 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     }
     
     func didTapAdd() {
-        let viewController = AddKeywordViewController()
-        viewController.delegate = self
-        
+        let viewController = AddKeywordViewController(delegate: self)
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -83,12 +86,29 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
         }
     }
     
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let items = userDefaults?.stringArray(forKey: "BlacklistKeywords") {
+            let viewController = AddKeywordViewController(delegate: self, keyword: items[indexPath.row])
+            navigationController?.pushViewController(viewController, animated: true)
+            rowBeingEdited = indexPath.row
+        }
+    }
+    
     // MARK: - AddKeywordViewControllerDelegate
     
     func addKeywordViewController(_ viewController: AddKeywordViewController, didSaveKeyword keyword: String) {
         mutateItems { items in
-            items.append(keyword)
+            if let rowBeingEdited = rowBeingEdited {
+                items[rowBeingEdited] = keyword
+            }
+            else {
+                items.append(keyword)
+            }
         }
+        
+        rowBeingEdited = nil
         
         tableView.reloadData()
     }

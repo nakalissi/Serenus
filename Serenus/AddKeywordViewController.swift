@@ -15,7 +15,7 @@ protocol AddKeywordViewControllerDelegate: class {
 
 final class AddKeywordViewController: UITableViewController, UITextFieldDelegate {
     
-    weak var delegate: AddKeywordViewControllerDelegate?
+    private weak var delegate: AddKeywordViewControllerDelegate?
     
     private lazy var textFieldCell: TextFieldCell = {
         let textFieldCell = TextFieldCell()
@@ -27,8 +27,12 @@ final class AddKeywordViewController: UITableViewController, UITextFieldDelegate
         return textFieldCell
     }()
     
-    init() {
+    init(delegate: AddKeywordViewControllerDelegate, keyword: String? = nil) {
+        self.delegate = delegate
+        
         super.init(style: .grouped)
+        
+        textFieldCell.textField.text = keyword
     }
     
     @available(*, unavailable)
