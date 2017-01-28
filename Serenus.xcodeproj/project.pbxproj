@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F00077D1E3CFF1D00CD374E /* Blacklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F00077C1E3CFF1D00CD374E /* Blacklist.swift */; };
+		3F00077E1E3D06E000CD374E /* Blacklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F00077C1E3CFF1D00CD374E /* Blacklist.swift */; };
+		3F00077F1E3D08A300CD374E /* Blacklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F00077C1E3CFF1D00CD374E /* Blacklist.swift */; };
 		3F8559971DE24976001FB974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8559961DE24976001FB974 /* AppDelegate.swift */; };
 		3F8559991DE24976001FB974 /* BlacklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8559981DE24976001FB974 /* BlacklistViewController.swift */; };
 		3F85599E1DE24976001FB974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F85599D1DE24976001FB974 /* Assets.xcassets */; };
@@ -54,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3F00077C1E3CFF1D00CD374E /* Blacklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blacklist.swift; sourceTree = "<group>"; };
 		3F8559931DE24976001FB974 /* Serenus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Serenus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F8559961DE24976001FB974 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F8559981DE24976001FB974 /* BlacklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlacklistViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				3F8559961DE24976001FB974 /* AppDelegate.swift */,
+				3F00077C1E3CFF1D00CD374E /* Blacklist.swift */,
 				3F8559981DE24976001FB974 /* BlacklistViewController.swift */,
 				3F8559C01DE252A4001FB974 /* AddKeywordViewController.swift */,
 				3F94CD2E1E333244004191CB /* TextFieldCell.swift */,
@@ -309,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F00077D1E3CFF1D00CD374E /* Blacklist.swift in Sources */,
 				3F8559991DE24976001FB974 /* BlacklistViewController.swift in Sources */,
 				3F8559C11DE252A4001FB974 /* AddKeywordViewController.swift in Sources */,
 				3F8559971DE24976001FB974 /* AppDelegate.swift in Sources */,
@@ -321,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F8559B11DE24986001FB974 /* ContentBlockerRequestHandler.swift in Sources */,
+				3F00077E1E3D06E000CD374E /* Blacklist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F8559CB1DE29F27001FB974 /* ActionRequestHandler.swift in Sources */,
+				3F00077F1E3D08A300CD374E /* Blacklist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

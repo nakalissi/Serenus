@@ -6,17 +6,15 @@
 //  Copyright © 2016 Robert Anderson. All rights reserved.
 //
 
-import UIKit
-import MobileCoreServices
+import Foundation
 
 class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
     
-    private let userDefaults = UserDefaults(suiteName: "group.com.noisysocks.Serenus")
+    private let blacklist = Blacklist()
 
     func beginRequest(with context: NSExtensionContext) {
-        let blacklistKeywords = userDefaults?.stringArray(forKey: "BlacklistKeywords") ?? []
-        let blockerList = blacklistKeywords.map {
-            (keyword: String) -> [String: Any] in
+        
+        let blockerList = blacklist.keywords.map { keyword -> [String : Any] in
             let escapedKeyword = NSRegularExpression.escapedPattern(for: keyword)
             return [
                 "action": ["type": "block"],

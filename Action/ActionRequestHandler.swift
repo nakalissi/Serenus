@@ -8,20 +8,18 @@
 
 import UIKit
 import MobileCoreServices
-import SafariServices
 
 class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
 
-    var extensionContext: NSExtensionContext?
-    private let userDefaults = UserDefaults(suiteName: "group.com.noisysocks.Serenus")
+    private let blacklist = Blacklist()
+    private var extensionContext: NSExtensionContext?
     
     func beginRequest(with context: NSExtensionContext) {
-        // Do not call super in an Action extension with no user interface
         self.extensionContext = context
         
         var found = false
         
-        // Find the item containing the results from the JavaScript preprocessing.
+        // Find the item containing the results from the JavaScript preprocessing
         outer:
             for item in context.inputItems as! [NSExtensionItem] {
                 if let attachments = item.attachments {
@@ -43,30 +41,26 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         if !found {
             self.doneWithResults(nil)
         }
+        
+        // Do not call super in an Action extension with no user interface
     }
     
     func itemLoadCompletedWithPreprocessingResults(_ javaScriptPreprocessingResults: [String: Any]) {
-        var blacklistKeywords = self.userDefaults?.stringArray(forKey: "BlacklistKeywords") ?? []
         if let host = javaScriptPreprocessingResults["host"] as? String {
-            blacklistKeywords.append(host)
-        }
-        self.userDefaults?.set(blacklistKeywords, forKey: "BlacklistKeywords")
-        SFContentBlockerManager.reloadContentBlocker(withIdentifier: "com.noisysocks.Serenus.ContentBlocker", completionHandler: {
-            (error: Error?) -> Void in
-            if let error = error {
-                fatalError(error.localizedDescription)
+            blacklist.mutate { keywords in
+                if !keywords.contains(host) {
+                    keywords.append(host)
+                }
             }
-        })
-        self.doneWithResults(nil)
+            
+            self.doneWithResults(javaScriptPreprocessingResults)
+        }
     }
     
-    func doneWithResults(_ resultsForJavaScriptFinalizeArg: [String: Any]?) {
+    private func doneWithResults(_ resultsForJavaScriptFinalizeArg: [String: Any]?) {
         if let resultsForJavaScriptFinalize = resultsForJavaScriptFinalizeArg {
-            // Construct an NSExtensionItem of the appropriate type to return our
-            // results dictionary in.
-            
-            // These will be used as the arguments to the JavaScript finalize()
-            // method.
+            // Construct an NSExtensionItem of the appropriate type to return our results dictionary in
+            // These will be used as the arguments to the JavaScript finalize() method
             
             let resultsDictionary = [NSExtensionJavaScriptFinalizeArgumentKey: resultsForJavaScriptFinalize]
             
@@ -75,16 +69,14 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
             let resultsItem = NSExtensionItem()
             resultsItem.attachments = [resultsProvider]
             
-            // Signal that we're complete, returning our results.
+            // Signal that we're complete, returning our results
             self.extensionContext!.completeRequest(returningItems: [resultsItem], completionHandler: nil)
         } else {
-            // We still need to signal that we're done even if we have nothing to
-            // pass back.
+            // We still need to signal that we're done even if we have nothing to pass back
             self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
         }
         
-        // Don't hold on to this after we finished with it.
+        // Don't hold on to this after we finished with it
         self.extensionContext = nil
     }
-
 }

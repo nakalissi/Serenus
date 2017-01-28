@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import SafariServices
 
 final class BlacklistViewController: UITableViewController, AddKeywordViewControllerDelegate {
 
-    private let userDefaults = UserDefaults(suiteName: "group.com.noisysocks.Serenus")
+    private let blacklist = Blacklist()
     
     private var rowBeingEdited: Int?
     
@@ -56,23 +55,19 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     // MARK: - UITableViewDataSource
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userDefaults?.stringArray(forKey: "BlacklistKeywords")?.count ?? 0
+        return blacklist.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "KeywordCell") ?? UITableViewCell(style: .default, reuseIdentifier: "KeywordCell")
-        
-        if let items = userDefaults?.stringArray(forKey: "BlacklistKeywords") {
-             cell.textLabel?.text = items[indexPath.row]
-        }
-        
+        cell.textLabel?.text = blacklist.keyword(at: indexPath.row)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            mutateItems { items in
-                items.remove(at: indexPath.row)
+            blacklist.mutate { keywords in
+                keywords.remove(at: indexPath.row)
             }
             
             tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -80,17 +75,17 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        mutateItems { items in
-            let item = items.remove(at: sourceIndexPath.row)
-            items.insert(item, at: destinationIndexPath.row)
+        blacklist.mutate { keywords in
+            let keyword = keywords.remove(at: sourceIndexPath.row)
+            keywords.insert(keyword, at: destinationIndexPath.row)
         }
     }
     
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let items = userDefaults?.stringArray(forKey: "BlacklistKeywords") {
-            let viewController = AddKeywordViewController(delegate: self, keyword: items[indexPath.row])
+        if let keyword = blacklist.keyword(at: indexPath.row) {
+            let viewController = AddKeywordViewController(delegate: self, keyword: keyword)
             navigationController?.pushViewController(viewController, animated: true)
             rowBeingEdited = indexPath.row
         }
@@ -99,34 +94,17 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     // MARK: - AddKeywordViewControllerDelegate
     
     func addKeywordViewController(_ viewController: AddKeywordViewController, didSaveKeyword keyword: String) {
-        mutateItems { items in
+        blacklist.mutate { keywords in
             if let rowBeingEdited = rowBeingEdited {
-                items[rowBeingEdited] = keyword
+                keywords[rowBeingEdited] = keyword
             }
             else {
-                items.append(keyword)
+                keywords.append(keyword)
             }
         }
         
         rowBeingEdited = nil
         
         tableView.reloadData()
-    }
-    
-    // MARK: - Private
-    
-    private func mutateItems(action: (inout [String]) -> Void) {
-        var items = userDefaults?.stringArray(forKey: "BlacklistKeywords") ?? []
-        action(&items)
-        userDefaults?.set(items, forKey: "BlacklistKeywords")
-        
-        SFContentBlockerManager.reloadContentBlocker(
-            withIdentifier: "com.noisysocks.Serenus.ContentBlocker",
-            completionHandler: { error in
-                if let error = error {
-                    fatalError(error.localizedDescription)
-                }
-            }
-        )
     }
 }
