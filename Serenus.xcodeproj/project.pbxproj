@@ -123,11 +123,11 @@
 		3F8559951DE24976001FB974 /* Serenus */ = {
 			isa = PBXGroup;
 			children = (
-				3F8559BA1DE2498E001FB974 /* Serenus.entitlements */,
 				3F8559961DE24976001FB974 /* AppDelegate.swift */,
 				3F8559981DE24976001FB974 /* BlacklistViewController.swift */,
 				3F8559C01DE252A4001FB974 /* AddKeywordViewController.swift */,
 				3F94CD2E1E333244004191CB /* TextFieldCell.swift */,
+				3F8559BA1DE2498E001FB974 /* Serenus.entitlements */,
 				3F85599D1DE24976001FB974 /* Assets.xcassets */,
 				3F85599F1DE24976001FB974 /* LaunchScreen.storyboard */,
 				3F8559A21DE24976001FB974 /* Info.plist */,
@@ -138,9 +138,9 @@
 		3F8559AD1DE24986001FB974 /* ContentBlocker */ = {
 			isa = PBXGroup;
 			children = (
+				3F8559B01DE24986001FB974 /* ContentBlockerRequestHandler.swift */,
 				3F8559BB1DE249AA001FB974 /* ContentBlocker.entitlements */,
 				3F8559AE1DE24986001FB974 /* blockerList.json */,
-				3F8559B01DE24986001FB974 /* ContentBlockerRequestHandler.swift */,
 				3F8559B21DE24986001FB974 /* Info.plist */,
 			);
 			path = ContentBlocker;
@@ -149,9 +149,9 @@
 		3F8559C91DE29F27001FB974 /* Action */ = {
 			isa = PBXGroup;
 			children = (
-				3F8559D51DE2A2A4001FB974 /* Action.entitlements */,
 				3F8559CA1DE29F27001FB974 /* ActionRequestHandler.swift */,
 				3F8559CC1DE29F27001FB974 /* Action.js */,
+				3F8559D51DE2A2A4001FB974 /* Action.entitlements */,
 				3F8559CE1DE29F27001FB974 /* Info.plist */,
 			);
 			path = Action;
