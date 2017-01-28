@@ -30,6 +30,7 @@ final class BlacklistViewController: UITableViewController, AddKeywordViewContro
     }
     
     override func viewDidLoad() {
+        navigationItem.title = "Serenus"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(didTapEdit))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
         

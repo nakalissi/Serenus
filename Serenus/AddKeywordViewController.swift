@@ -41,6 +41,7 @@ final class AddKeywordViewController: UITableViewController, UITextFieldDelegate
     }
     
     override func viewDidLoad() {
+        navigationItem.title = "Add to blacklist"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didTapSave))
     }
     
